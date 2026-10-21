@@ -1,9 +1,9 @@
 import socketio
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-from routers import newanime, takeitem
+from routers import newanime, takeitem, episodestake
 
 app = FastAPI()
 sio = socketio.AsyncServer(async_mode="asgi", cors_allowed_origins="*")
@@ -19,6 +19,7 @@ app.add_middleware(
 
 app.include_router(newanime.router)
 app.include_router(takeitem.router)
+app.include_router(episodestake.router)
 
 class Response(BaseModel):
     login:str

@@ -1,6 +1,9 @@
+import {Link} from "react-router";
+
 interface AnimeRowCardProps {
+    id: string;
     name: string;
-    poster: string;         // уже полный URL
+    poster: string;
     year: number;
     episodes: number;
     genres: { id: string; russian: string }[];
@@ -8,6 +11,7 @@ interface AnimeRowCardProps {
 }
 
 export function AnimeRowCard({
+                                 id,
                                  name,
                                  poster,
                                  year,
@@ -16,8 +20,7 @@ export function AnimeRowCard({
                                  score,
                              }: AnimeRowCardProps) {
     return (
-        <article className="group flex overflow-hidden rounded-2xl bg-neutral-900/60 ring-1 ring-white/5 transition duration-300 hover:bg-neutral-900 hover:ring-rose-500/50">
-            {/* Постер слева */}
+        <Link to={`item/${id}`} className="group flex overflow-hidden rounded-2xl bg-neutral-900/60 ring-1 ring-white/5 transition duration-300 hover:bg-neutral-900 hover:ring-rose-500/50">
             <div className="relative w-32 shrink-0 overflow-hidden bg-neutral-800 sm:w-36 lg:w-40">
                 <div className="aspect-[2/3] h-full w-full">
                     <img
@@ -66,6 +69,6 @@ export function AnimeRowCard({
                     ))}
                 </div>
             </div>
-        </article>
+        </Link>
     );
 }

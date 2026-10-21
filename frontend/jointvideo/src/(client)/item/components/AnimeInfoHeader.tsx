@@ -1,4 +1,3 @@
-// components/AnimeInfoHeader.tsx
 import { Pencil, QrCode, Heart, Gift, Bug, Maximize2 } from "lucide-react";
 
 interface Poster { id: string; originalUrl: string; mainUrl: string; }

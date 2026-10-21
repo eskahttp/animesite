@@ -32,6 +32,7 @@ export const MainPage = ({}: Props): React.ReactNode => {
                     {animeList?.map((anime) => (
                         <AnimeRowCard
                             key={anime.id}
+                            id={anime.id}
                             name={anime.russian || anime.name}
                             poster={anime.poster.mainUrl}
                             year={anime.airedOn.year}

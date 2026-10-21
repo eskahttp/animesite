@@ -27,7 +27,7 @@ export const AnimeItemOnId = (): React.ReactNode => {
                         : animeInfo && <AnimeInfoHeader anime={animeInfo} />
                     }
 
-                    <AnimeOnIdTSX anime={animeInfo} />
+                    <AnimeOnIdTSX/>
                 </div>
             </div>
         </div>
