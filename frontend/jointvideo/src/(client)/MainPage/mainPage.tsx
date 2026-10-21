@@ -1,19 +1,20 @@
-import {useQuery} from "@tanstack/react-query";
-import {selectNewAnime} from "./selectNewAnime/selectNewAnime.ts";
-import {AnimeRowCard} from "./components/AnimeRowCard.tsx";
+import { useQuery } from "@tanstack/react-query";
+import { selectNewAnime } from "./selectNewAnime/selectNewAnime.ts";
+import { AnimeRowCard } from "./components/AnimeRowCard.tsx";
+import type { NewAnime } from "./types.ts";
 
 interface Props {}
 
 export const MainPage = ({}: Props): React.ReactNode => {
-
-    const { data: animeList, isLoading, error } = useQuery({
-        queryKey: ['anime', 'ongoing', 1],
-        queryFn: () => {
-            return selectNewAnime()
+    const { data: animeList, isLoading, error } = useQuery<NewAnime[]>({
+        queryKey: ["anime", "ongoing", 1],
+        queryFn: async () => {
+           const res = await selectNewAnime()
+            console.log(res)
+            return res
         },
-        staleTime: 1000 * 60 * 5,
+        staleTime: 1000 * 60 * 60,
     });
-
 
     return (
         <div className="min-h-screen bg-neutral-900 text-white">
@@ -24,15 +25,23 @@ export const MainPage = ({}: Props): React.ReactNode => {
                     </h2>
                 </div>
 
+                {isLoading && (
+                    <p className="text-neutral-400">Загрузка...</p>
+                )}
+                {error && (
+                    <p className="text-rose-500">Ошибка загрузки</p>
+                )}
+
                 <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
                     {animeList?.map((anime) => (
-                        <AnimeRowCard key={anime.id}
-                                   name={anime.name.main}
-                                   poster={anime.poster.src}
-                                   year={anime.year}
-                                   latest_episode={anime.latest_episode.ordinal}
-                                   genres={anime.genres}
-                                   rating={anime.shikimori.rating}
+                        <AnimeRowCard
+                            key={anime.id}
+                            name={anime.russian || anime.name}
+                            poster={anime.poster.mainUrl}
+                            year={anime.airedOn.year}
+                            episodes={anime.episodesAired}
+                            genres={anime.genres}
+                            score={anime.score}
                         />
                     ))}
                 </div>

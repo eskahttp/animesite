@@ -1,28 +1,28 @@
-interface AnimeRowCard {
+interface AnimeRowCardProps {
     name: string;
-    poster: string;
+    poster: string;         // уже полный URL
     year: number;
-    latest_episode: number;
-    genres: {name: string}[];
-    rating: number;
+    episodes: number;
+    genres: { id: string; russian: string }[];
+    score: number;
 }
 
 export function AnimeRowCard({
-                          name,
-                          poster,
-                          year,
-                          latest_episode,
-                          genres,
-                          rating
-                      }: AnimeRowCard) {
+                                 name,
+                                 poster,
+                                 year,
+                                 episodes,
+                                 genres,
+                                 score,
+                             }: AnimeRowCardProps) {
     return (
         <article className="group flex overflow-hidden rounded-2xl bg-neutral-900/60 ring-1 ring-white/5 transition duration-300 hover:bg-neutral-900 hover:ring-rose-500/50">
-            {/* Постер слева — чуть компактнее, т.к. в ряду теперь 2 карточки */}
+            {/* Постер слева */}
             <div className="relative w-32 shrink-0 overflow-hidden bg-neutral-800 sm:w-36 lg:w-40">
                 <div className="aspect-[2/3] h-full w-full">
                     <img
-                        src={`https://anilibria.top${poster}`}
-                        alt={'photo'}
+                        src={poster}
+                        alt={name}
                         className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                     />
                 </div>
@@ -44,21 +44,25 @@ export function AnimeRowCard({
                     >
                         <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                     </svg>
-                    <span className="text-lg font-bold text-amber-400">{rating}</span>
-                    <span className="text-xs text-neutral-400">все еще хз</span>
+                    <span className="text-lg font-bold text-amber-400">
+                        {score.toFixed(2)}
+                    </span>
                 </div>
 
                 <p className="text-xs text-neutral-400 lg:text-sm">
                     {year}
                     <span className="mx-2 text-neutral-700">|</span>
-                    Серий: <span className="text-neutral-300">{latest_episode}</span>
+                    Серий: <span className="text-neutral-300">{episodes}</span>
                 </p>
 
                 <div className="text-xs lg:text-sm">
                     <span className="text-neutral-400">Жанры: </span>
-                    {genres.map((g) => (
-                        <span key={g.name}>
-                            <span className="text-rose-500 hover:underline">{g.name}<span className={'text-neutral-400'} >, </span></span>
+                    {genres.map((g, i) => (
+                        <span key={g.id} className="text-rose-500 hover:underline">
+                            {g.russian}
+                            {i < genres.length - 1 && (
+                                <span className="text-neutral-400">, </span>
+                            )}
                         </span>
                     ))}
                 </div>

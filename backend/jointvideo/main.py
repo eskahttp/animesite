@@ -1,8 +1,9 @@
 import socketio
-import httpx
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+
+from routers import newanime
 
 app = FastAPI()
 sio = socketio.AsyncServer(async_mode="asgi", cors_allowed_origins="*")
@@ -15,6 +16,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(newanime.router)
 
 class Response(BaseModel):
     login:str
@@ -42,13 +45,3 @@ async def chat(sid, data):
 @sio.event
 async def disconnect(sid):
     print("disconnect", sid)
-
-@app.get("/newanime")
-async def root():
-    async with httpx.AsyncClient() as client:
-        response = await client.get(
-            "https://anilibria.top/api/v1/anime/releases/latest?limit=16&include=id%2Cyear%2Cname%2Cposter%2Cshikimori%2Cgenres%2Clatest_episode"
-        )
-        if response.status_code != 200:
-            raise HTTPException(status_code=response.status_code, detail="Not found")
-        return response.json()
