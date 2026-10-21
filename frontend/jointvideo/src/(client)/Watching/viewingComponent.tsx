@@ -5,7 +5,7 @@ interface Props {}
 
 export const ViewingComponent = ({}: Props) : React.ReactNode => {
 
-    const { id } = useParams()
+    const { room } = useParams()
 
     return (<div className="min-h-screen bg-neutral-900 text-neutral-100 font-sans">
         <main className="max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -86,7 +86,7 @@ export const ViewingComponent = ({}: Props) : React.ReactNode => {
                         </div>
                     </div>
                     <p className="text-sm text-neutral-300 mt-3 leading-relaxed">
-                        Человечество живёт за высокими стенами, скрываясь от титанов... {id}
+                        Человечество живёт за высокими стенами, скрываясь от титанов... {room}
                     </p>
                 </div>
             </section>
