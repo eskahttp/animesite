@@ -21,12 +21,12 @@ export type Genre = {
 export type NewAnime = {
     id: string;
     malId: string;
-    name: string;          // оригинальное (Gintama': Enchousen)
-    russian: string;       // русское
+    name: string;
+    russian: string;
     english: string | null;
     synonyms: string[];
-    rating: string;        // возрастной рейтинг (pg_13 и т.п.)
-    score: number;         // рейтинг Shikimori
+    rating: string;
+    score: number;
     status: "released" | "ongoing" | "anons" | string;
     episodes: number;
     episodesAired: number;

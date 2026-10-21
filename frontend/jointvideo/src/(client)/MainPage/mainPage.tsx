@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { selectNewAnime } from "./selectNewAnime/selectNewAnime.ts";
 import { AnimeRowCard } from "./components/AnimeRowCard.tsx";
-import type { NewAnime } from "./types.ts";
+import type {NewAnime} from "./types/NewAnimeTypes.ts";
+import {MainPageSkeleton} from "./components/AnimeRowCardSkeleton.tsx";
 
 interface Props {}
 
@@ -16,6 +17,8 @@ export const MainPage = ({}: Props): React.ReactNode => {
         staleTime: 1000 * 60 * 60,
     });
 
+    if (isLoading) return <MainPageSkeleton/>
+
     return (
         <div className="min-h-screen bg-neutral-900 text-white">
             <section className="mx-auto max-w-6xl px-6 py-10">
@@ -24,13 +27,6 @@ export const MainPage = ({}: Props): React.ReactNode => {
                         Новое на сайте
                     </h2>
                 </div>
-
-                {isLoading && (
-                    <p className="text-neutral-400">Загрузка...</p>
-                )}
-                {error && (
-                    <p className="text-rose-500">Ошибка загрузки</p>
-                )}
 
                 <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
                     {animeList?.map((anime) => (

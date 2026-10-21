@@ -30,7 +30,6 @@ export function AnimeRowCard({
                 <div className="absolute inset-y-0 right-0 w-[2px] bg-gradient-to-b from-transparent via-rose-500/40 to-transparent" />
             </div>
 
-            {/* Информация справа */}
             <div className="flex min-w-0 flex-1 flex-col gap-2.5 p-4 lg:p-5">
                 <h3 className="line-clamp-2 text-sm font-bold uppercase tracking-wide text-white transition group-hover:text-rose-500 lg:text-base">
                     {name}
