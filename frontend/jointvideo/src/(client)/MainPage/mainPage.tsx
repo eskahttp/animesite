@@ -9,11 +9,7 @@ interface Props {}
 export const MainPage = ({}: Props): React.ReactNode => {
     const { data: animeList, isLoading, error } = useQuery<NewAnime[]>({
         queryKey: ["anime", "ongoing", 1],
-        queryFn: async () => {
-           const res = await selectNewAnime()
-            console.log(res)
-            return res
-        },
+        queryFn: async () => selectNewAnime(),
         staleTime: 1000 * 60 * 60,
     });
 

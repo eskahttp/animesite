@@ -3,9 +3,18 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
+from contextlib import asynccontextmanager
+from database import db
+
 from routers import newanime, takeitem, episodestake
 
-app = FastAPI()
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    await db.connect()
+    yield
+    await db.disconnect()
+
+app = FastAPI(lifespan=lifespan)
 sio = socketio.AsyncServer(async_mode="asgi", cors_allowed_origins="*")
 socket_app = socketio.ASGIApp(sio, other_asgi_app=app)
 

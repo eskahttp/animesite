@@ -35,10 +35,7 @@ export const TopBar = ({}: Props) : React.ReactNode => {
             </div>
 
             <div className="absolute bottom-6 left-10 z-10">
-                <h1 className="text-3xl font-bold drop-shadow-lg">AniWave</h1>
-                <p className="text-neutral-200 text-xs mt-1 drop-shadow">
-                    Твоя волна аниме
-                </p>
+                <h1 className="text-3xl font-bold drop-shadow-lg">Diana Anime</h1>
             </div>
         </section>
 
