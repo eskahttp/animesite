@@ -20,7 +20,7 @@ export const MainPage = ({}: Props): React.ReactNode => {
             <section className="mx-auto max-w-6xl px-6 py-10">
                 <div className="mb-8">
                     <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
-                        Новое на сайте
+                        Новые аниме
                     </h2>
                 </div>
 

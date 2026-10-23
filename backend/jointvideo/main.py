@@ -6,7 +6,8 @@ from pydantic import BaseModel
 from contextlib import asynccontextmanager
 from database import db
 
-from routers import newanime, takeitem, episodestake
+from routers import newanime, takeitem, episodestake, searchanime
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -29,6 +30,7 @@ app.add_middleware(
 app.include_router(newanime.router)
 app.include_router(takeitem.router)
 app.include_router(episodestake.router)
+app.include_router(searchanime.router)
 
 class Response(BaseModel):
     login:str

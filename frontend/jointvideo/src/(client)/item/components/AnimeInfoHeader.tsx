@@ -1,4 +1,4 @@
-import { Pencil, QrCode, Heart, Gift, Bug, Maximize2 } from "lucide-react";
+import { Pencil, QrCode, Heart, Maximize2 } from "lucide-react";
 
 interface Poster { id: string; originalUrl: string; mainUrl: string; }
 interface Genre { id: string; name: string; russian: string; kind: string; }
@@ -61,7 +61,6 @@ export const AnimeInfoHeader = ({ anime }: { anime: Anime}): React.ReactNode => 
 
     return (
                     <div className="flex flex-col md:flex-row gap-6">
-                        {/* ПОСТЕР */}
                         <div className="flex-shrink-0 w-full md:w-64">
                             <div className="relative rounded-xl overflow-hidden border border-white/10 bg-neutral-900">
                                 {anime.poster?.mainUrl && (
@@ -89,7 +88,6 @@ export const AnimeInfoHeader = ({ anime }: { anime: Anime}): React.ReactNode => 
                             </div>
                         </div>
 
-                        {/* ДАННЫЕ */}
                         <div className="flex-1 min-w-0">
                             <h1 className="text-2xl md:text-3xl font-bold text-neutral-50 leading-tight">
                                 {anime.russian || anime.name}
@@ -152,7 +150,6 @@ export const AnimeInfoHeader = ({ anime }: { anime: Anime}): React.ReactNode => 
                                             ? `${anime.episodesAired} / ${anime.episodes}` : anime.episodes}
                                     </Row>
                                 )}
-                                {!!anime.duration && <Row label="Длительность:">{anime.duration} мин.</Row>}
                                 {anime.fandubbers?.length > 0 && (
                                     <Row label="Озвучки:">
                                         <div className="flex flex-wrap gap-1.5">
@@ -171,7 +168,6 @@ export const AnimeInfoHeader = ({ anime }: { anime: Anime}): React.ReactNode => 
                                     ))}
                                 </div>
                             )}
-
                             <button className="mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-md bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-medium transition">
                                 Порядок просмотра
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

@@ -25,7 +25,6 @@ async def get_new_anime():
         status
         episodes
         episodesAired
-        duration
         airedOn { year month day date }
         releasedOn { year month day date }
         season

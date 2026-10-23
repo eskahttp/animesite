@@ -20,6 +20,11 @@ async def root(payload: AnimeRequest):
         response = await client.get(
             f"https://anilibria.top/api/v1/anime/releases/{episode_id['anilibria_id']}?include=episodes",
         )
+
+        data = response.json()
+
         if response.status_code != 200:
             raise HTTPException(status_code=response.status_code, detail="Not found")
-        return response.json()
+        if "message" in data:
+            return {"episodes": []}
+        return data
