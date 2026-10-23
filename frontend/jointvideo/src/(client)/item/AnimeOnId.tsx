@@ -8,12 +8,29 @@ import { AnimeInfoHeader } from "./components/AnimeInfoHeader.tsx";
 import { AnimeInfoHeaderSkeleton } from "./components/AnimeInfoHeaderSkeleton.tsx";
 import {AnimeOnIdTSX} from "./components/AnimeOnIdTSX.tsx";
 
+type Episodes = {
+    hls_480: string;
+    hls_720: string;
+    hls_1080: string;
+    id: string
+    name: string
+}
+
+type QueryData = {
+    item : NewAnime
+    episodes: Episodes[]
+}
+
 export const AnimeItemOnId = (): React.ReactNode => {
     const { item } = useParams<{ item: string }>();
 
-    const { data: animeInfo, isLoading } = useQuery<NewAnime>({
+    const { data, isLoading } = useQuery<QueryData>({
         queryKey: ["anime", "watching", item],
-        queryFn: () => TakeAnimeOnId(item!),
+        queryFn: async () => {
+           const res = await TakeAnimeOnId(item!)
+            console.log(res)
+            return res
+        },
         enabled: !!item,
         staleTime: 1000 * 60 * 60,
     });
@@ -24,10 +41,12 @@ export const AnimeItemOnId = (): React.ReactNode => {
                 <div className="rounded-2xl bg-neutral-800/60 ring-1 ring-white/5 p-5 flex flex-col gap-6">
                     {isLoading
                         ? <AnimeInfoHeaderSkeleton />
-                        : animeInfo && <AnimeInfoHeader anime={animeInfo} />
+                        : data?.item && <AnimeInfoHeader anime={data.item} />
                     }
 
-                    <AnimeOnIdTSX/>
+                    <AnimeOnIdTSX
+                        episodes={data?.episodes}
+                    />
                 </div>
             </div>
         </div>
