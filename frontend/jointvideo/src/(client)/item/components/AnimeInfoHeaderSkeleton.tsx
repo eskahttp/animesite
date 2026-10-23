@@ -52,14 +52,14 @@ export function AnimeInfoHeaderSkeleton() {
                             {/* таблица свойств */}
                             <div className="grid grid-cols-[150px_1fr] gap-y-3">
                                 {Array.from({ length: 7 }).map((_, i) => (
-                                    <>
+                                    <div key={`c-${i}`}>
                                         <Shimmer key={`l-${i}`} className="h-4 w-28 rounded" />
                                         <div key={`r-${i}`} className="flex flex-wrap gap-1.5">
                                             <Shimmer className="h-5 w-16 rounded" />
                                             <Shimmer className="h-5 w-20 rounded" />
                                             <Shimmer className="h-5 w-14 rounded" />
                                         </div>
-                                    </>
+                                    </div>
                                 ))}
                             </div>
 

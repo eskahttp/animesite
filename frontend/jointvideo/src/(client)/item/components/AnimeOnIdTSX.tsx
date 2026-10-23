@@ -6,7 +6,7 @@ import {
 
 import '@vidstack/react/player/styles/default/theme.css';
 import '@vidstack/react/player/styles/default/layouts/video.css';
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 
 interface Episode {
     hls_480: string;
@@ -21,15 +21,15 @@ interface Props {
 }
 
 export const AnimeOnIdTSX = ({ episodes }: Props) => {
-    const [mediaSrc, setMediaSrc] = useState<string>(()=> {
-        if (!!episodes && episodes.length > 0) {
-            return episodes[0].hls_1080 || episodes[0].hls_720 || episodes[0].hls_480;
-        }
-        return 'https://cdn.jwplayer.com/manifests/pZxWPRg4.m3u8'
-    });
+    const [mediaSrc, setMediaSrc] = useState<string>('https://cdn.jwplayer.com/manifests/pZxWPRg4.m3u8');
     const [activeId, setActiveId] = useState<string | null>(
         episodes?.[0]?.id ?? null
     );
+
+    useEffect(() => {
+        if (!episodes) return;
+        setMediaSrc(episodes[0].hls_1080 || episodes[0].hls_720 || episodes[0].hls_480);
+    }, []);
 
     const handleSelect = (ep: Episode) => {
         setActiveId(ep.id);
@@ -49,7 +49,7 @@ export const AnimeOnIdTSX = ({ episodes }: Props) => {
                                 'min-w-[40px] h-10 px-3 rounded-lg text-sm font-semibold',
                                 'flex items-center justify-center select-none',
                                 'transition-all duration-200 ease-out',
-                                'focus:outline-none focus:ring-2 focus:ring-emerald-400/60 hover:cursor-pointer',
+                                'focus:outline-none focus:ring-2 focus:ring-emerald-400/60 hover:cursor-pointer ',
                                 isActive
                                     ? 'bg-emerald-500 text-white shadow-md shadow-emerald-500/30 scale-105'
                                     : 'bg-neutral-800 text-neutral-200 hover:bg-neutral-700 hover:text-white',

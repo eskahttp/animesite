@@ -34,7 +34,7 @@ const RATING_MAP: Record<string, string> = {
     g: "G", pg: "PG", pg_13: "PG-13", r: "R-17", r_plus: "R+", rx: "Rx",
 };
 
-const ICON_BTNS = [Pencil, QrCode, Heart, Gift, Bug];
+const ICON_BTNS = [Pencil, QrCode, Heart];
 
 const cleanDescription = (text: string | null | undefined): string =>
     (text ?? "").replace(/\[character=\d+\](.*?)\[\/character\]/g, "$1");
@@ -80,7 +80,7 @@ export const AnimeInfoHeader = ({ anime }: { anime: Anime}): React.ReactNode => 
                                     </p>
                                 </div>
                             </div>
-                            <div className="flex items-center justify-between mt-3 px-1">
+                            <div className="flex items-center justify-between mt-3 px-7">
                                 {ICON_BTNS.map((Icon, i) => (
                                     <button key={i} className="w-9 h-9 rounded-md bg-neutral-700/60 hover:bg-neutral-600 flex items-center justify-center transition">
                                         <Icon size={16} className="text-neutral-200" />

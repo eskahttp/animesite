@@ -11,9 +11,14 @@ type Episodes = {
     }[]
 }
 
-export const TakeAnimeOnId = async (animeId:string) => {
+export const TakeAnimeBanner = async (animeId:string) => {
     const item = await api.post<AnimesResponse>('/takeitem', {id: animeId})
+
+    return item.data.animes[0]
+}
+
+export const TakeAnimeEpisodes = async (animeId:string) => {
     const episodes = await api.post<Episodes>('/episodestake', {id: animeId})
 
-    return {item: item.data.animes[0], episodes: episodes.episodes};
+    return episodes.episodes;
 }
