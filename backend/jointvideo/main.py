@@ -6,7 +6,7 @@ from pydantic import BaseModel
 from contextlib import asynccontextmanager
 from database import db
 
-from routers import newanime, takeitem, episodestake, searchanime
+from routers import newanime, takeitem, episodestake, searchanime, register, login
 
 
 @asynccontextmanager
@@ -31,6 +31,8 @@ app.include_router(newanime.router)
 app.include_router(takeitem.router)
 app.include_router(episodestake.router)
 app.include_router(searchanime.router)
+app.include_router(register.router)
+app.include_router(login.router)
 
 class Response(BaseModel):
     login:str

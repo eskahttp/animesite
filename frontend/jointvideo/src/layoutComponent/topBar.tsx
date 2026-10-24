@@ -1,5 +1,5 @@
 import {BarChart2, Home, List, LogIn, UserPlus, Users} from "lucide-react";
-import {NavLink} from "react-router";
+import {Link, NavLink} from "react-router";
 import {SearchAnimeForm} from "./components/searchAnimeForm.tsx";
 
 interface Props {}
@@ -24,14 +24,14 @@ export const TopBar = ({}: Props): React.ReactNode => {
                 <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-neutral-900"/>
 
                 <div className="absolute top-5 right-6 flex gap-3 z-10">
-                    <button className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition text-sm">
+                    <Link to={'/login'} className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition text-sm">
                         <LogIn size={16}/>
                         Вход
-                    </button>
-                    <button className="flex items-center gap-2 px-4 py-2 rounded-lg bg-rose-500/90 hover:bg-rose-500 transition text-sm font-medium shadow-lg shadow-rose-500/30">
+                    </Link>
+                    <Link to={'/register'} className="flex items-center gap-2 px-4 py-2 rounded-lg bg-rose-500/90 hover:bg-rose-500 transition text-sm font-medium shadow-lg shadow-rose-500/30">
                         <UserPlus size={16}/>
                         Регистрация
-                    </button>
+                    </Link>
                 </div>
 
                 <div className="absolute bottom-6 left-10 z-10">
